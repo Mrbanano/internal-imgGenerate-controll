@@ -20,6 +20,7 @@ type User {
   createdAt: DateTime
   rol: UserRolType
   registerDevice: String
+  customerId: String
 }
 
 enum UserReferenceType {
@@ -47,6 +48,7 @@ enum UserRolType {
 input UserWhereUniqueInput {
   id: ID
   email: String
+  customerId: String
 }
 
 input UserWhereInput {
@@ -70,6 +72,7 @@ input UserWhereInput {
   createdAt: DateTimeNullableFilter
   rol: UserRolTypeNullableFilter
   registerDevice: StringFilter
+  customerId: StringFilter
 }
 
 input IDFilter {
@@ -94,7 +97,13 @@ input StringFilter {
   contains: String
   startsWith: String
   endsWith: String
+  mode: QueryMode
   not: NestedStringFilter
+}
+
+enum QueryMode {
+  default
+  insensitive
 }
 
 input NestedStringFilter {
@@ -122,6 +131,7 @@ input StringNullableFilter {
   contains: String
   startsWith: String
   endsWith: String
+  mode: QueryMode
   not: StringNullableFilter
 }
 
@@ -179,6 +189,7 @@ input UserOrderByInput {
   createdAt: OrderDirection
   rol: OrderDirection
   registerDevice: OrderDirection
+  customerId: OrderDirection
 }
 
 enum OrderDirection {
@@ -204,6 +215,7 @@ input UserUpdateInput {
   createdAt: DateTime
   rol: UserRolType
   registerDevice: String
+  customerId: String
 }
 
 input UserUpdateArgs {
@@ -229,6 +241,7 @@ input UserCreateInput {
   createdAt: DateTime
   rol: UserRolType
   registerDevice: String
+  customerId: String
 }
 
 type GenerationRecord {
@@ -524,11 +537,6 @@ enum KeystoneAdminUIFieldMetaItemViewFieldMode {
 enum KeystoneAdminUIFieldMetaItemViewFieldPosition {
   form
   sidebar
-}
-
-enum QueryMode {
-  default
-  insensitive
 }
 
 type KeystoneAdminUIFieldGroupMeta {

@@ -33,7 +33,6 @@ var import_fields = require("@keystone-6/core/fields");
 var hiddenInfo = {
   createView: {
     fieldMode: ({ session: session2 }) => {
-      console.log(session2.data);
       return session2.data.rol === "admin" ? "edit" : "hidden";
     }
   },
@@ -222,6 +221,13 @@ var UserSchema = {
     }),
     registerDevice: (0, import_fields.text)({
       label: "Dispositivo",
+      ui: {
+        ...hiddenInfo
+      }
+    }),
+    customerId: (0, import_fields.text)({
+      label: "ID de stripe",
+      isIndexed: "unique",
       ui: {
         ...hiddenInfo
       }
@@ -457,16 +463,23 @@ var session = (0, import_session.statelessSessions)({
   secret: sessionSecret
 });
 
+// src/config/db.config.ts
+var import_config = require("dotenv/config");
+var DATABASE_URL = process.env.DATABASE_URL;
+var databaseConfig = {
+  provider: "postgresql",
+  url: DATABASE_URL,
+  onConnect: async () => {
+    console.log("connected to the database");
+  },
+  enableLogging: false,
+  idField: { kind: "uuid" }
+};
+
 // keystone.ts
 var keystone_default = withAuth(
   (0, import_core2.config)({
-    db: {
-      // we're using sqlite for the fastest startup experience
-      //   for more information on what database might be appropriate for you
-      //   see https://keystonejs.com/docs/guides/choosing-a-database#title
-      provider: "sqlite",
-      url: "file:./keystone.db"
-    },
+    db: databaseConfig,
     lists,
     session
   })
