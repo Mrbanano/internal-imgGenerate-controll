@@ -257,11 +257,6 @@ var import_core = require("@keystone-6/core");
 
 // src/models/GenerationRecord.ts
 var import_fields2 = require("@keystone-6/core/fields");
-
-// src/authController/accessControl.ts
-var isAdmin = ({ session: session2 }) => Boolean(session2?.data.rol === "admin");
-
-// src/models/GenerationRecord.ts
 var GenerationRecordSchema = {
   ui: {
     label: "Registro de generaciones",
@@ -282,7 +277,7 @@ var GenerationRecordSchema = {
       query: () => true,
       create: () => true,
       update: () => true,
-      delete: isAdmin
+      delete: () => true
     }
   },
   fields: {
@@ -302,6 +297,13 @@ var GenerationRecordSchema = {
       many: false,
       ui: {
         ...hiddenInfo
+      }
+    }),
+    prompt: (0, import_fields2.text)({
+      label: "Texto de entrada",
+      validation: { isRequired: true },
+      ui: {
+        ...limitInfo
       }
     }),
     generation: (0, import_fields2.text)({
@@ -353,15 +355,6 @@ var GenerationRecordSchema = {
       operation,
       resolvedData
     }) => {
-      if (operation === "update") {
-        const { updatedAt } = resolvedData;
-        if (!updatedAt) {
-          return {
-            ...resolvedData,
-            updatedAt: (/* @__PURE__ */ new Date()).toISOString()
-          };
-        }
-      }
       return resolvedData;
     }
   }
@@ -369,6 +362,11 @@ var GenerationRecordSchema = {
 
 // src/models/Balance.ts
 var import_fields3 = require("@keystone-6/core/fields");
+
+// src/authController/accessControl.ts
+var isAdmin = ({ session: session2 }) => Boolean(session2?.data.rol === "admin");
+
+// src/models/Balance.ts
 var BalanceSchema = {
   ui: {
     label: "Balance",

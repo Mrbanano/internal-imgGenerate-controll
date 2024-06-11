@@ -29,7 +29,7 @@ export const BalanceSchema = {
     balance: integer({
       label: "Balance",
       validation: { isRequired: true },
-      defaultValue: 0,
+      defaultValue: Number(process.env.DEFAULT_BALANCE) || 0,
     }),
     updatedAt: timestamp({
       label: "Actualizado",

@@ -248,6 +248,7 @@ type GenerationRecord {
   id: ID!
   generationID: String
   generatedBy: User
+  prompt: String
   generation: String
   status: String
   apiCreditCost: Float
@@ -267,6 +268,7 @@ input GenerationRecordWhereInput {
   id: IDFilter
   generationID: StringFilter
   generatedBy: UserWhereInput
+  prompt: StringFilter
   generation: StringFilter
   status: StringNullableFilter
   apiCreditCost: FloatFilter
@@ -288,6 +290,7 @@ input FloatFilter {
 input GenerationRecordOrderByInput {
   id: OrderDirection
   generationID: OrderDirection
+  prompt: OrderDirection
   generation: OrderDirection
   status: OrderDirection
   apiCreditCost: OrderDirection
@@ -298,6 +301,7 @@ input GenerationRecordOrderByInput {
 input GenerationRecordUpdateInput {
   generationID: String
   generatedBy: UserRelateToOneForUpdateInput
+  prompt: String
   generation: String
   status: String
   apiCreditCost: Float
@@ -319,6 +323,7 @@ input GenerationRecordUpdateArgs {
 input GenerationRecordCreateInput {
   generationID: String
   generatedBy: UserRelateToOneForCreateInput
+  prompt: String
   generation: String
   status: String
   apiCreditCost: Float

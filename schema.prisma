@@ -40,6 +40,7 @@ model GenerationRecord {
   generationID  String    @unique @default("")
   generatedBy   User?     @relation("GenerationRecord_generatedBy", fields: [generatedById], references: [id])
   generatedById String?   @map("generatedBy") @postgresql.Uuid
+  prompt        String    @default("")
   generation    String    @default("")
   status        String?   @default("En proceso")
   apiCreditCost Float
@@ -55,7 +56,7 @@ model Balance {
   userId    String?   @map("user") @postgresql.Uuid
   balance   Int       @default(0)
   updatedAt DateTime?
-  createdAt DateTime  @default("2024-06-09T21:47:18.676Z")
+  createdAt DateTime  @default("2024-06-11T01:30:20.256Z")
 
   @@index([userId])
 }

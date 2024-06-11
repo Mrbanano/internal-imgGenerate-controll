@@ -29,7 +29,7 @@ export const GenerationRecordSchema = {
       query: () => true,
       create: () => true,
       update: () => true,
-      delete: isAdmin,
+      delete: () => true,
     },
   },
   fields: {
@@ -49,6 +49,13 @@ export const GenerationRecordSchema = {
       many: false,
       ui: {
         ...(hiddenInfo as any),
+      },
+    }),
+    prompt: text({
+      label: "Texto de entrada",
+      validation: { isRequired: true },
+      ui: {
+        ...(limitInfo as any),
       },
     }),
     generation: text({
@@ -106,15 +113,15 @@ export const GenerationRecordSchema = {
       operation: string;
       resolvedData: any;
     }) => {
-      if (operation === "update") {
-        const { updatedAt } = resolvedData;
-        if (!updatedAt) {
-          return {
-            ...resolvedData,
-            updatedAt: new Date().toISOString(),
-          };
-        }
-      }
+      // if (operation === "update") {
+      //   const { updatedAt } = resolvedData;
+      //   if (!updatedAt) {
+      //     return {
+      //       ...resolvedData,
+      //       updatedAt: new Date().toISOString(),
+      //     };
+      //   }
+      // }
       return resolvedData;
     },
   },
