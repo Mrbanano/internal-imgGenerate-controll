@@ -5,6 +5,7 @@ import {
   text,
   timestamp,
   float,
+  integer,
 } from "@keystone-6/core/fields";
 import { isAdmin } from "../authController/accessControl";
 import { hiddenInfo, limitInfo } from "../authController/hiddeInfo";
@@ -58,6 +59,23 @@ export const GenerationRecordSchema = {
         ...(limitInfo as any),
       },
     }),
+
+    promptEnglish: text({
+      label: "Texto de entrada en ingles",
+      validation: { isRequired: false },
+      ui: {
+        ...(limitInfo as any),
+      },
+    }),
+
+    modelId: text({
+      label: "Id Modelo",
+      validation: { isRequired: true },
+      ui: {
+        ...(hiddenInfo as any),
+      },
+    }),
+
     generation: text({
       label: "Imagenes generadas",
       validation: { isRequired: false },
@@ -87,6 +105,22 @@ export const GenerationRecordSchema = {
       },
     }),
 
+    witdth: integer({
+      label: "Ancho de la imagen",
+      validation: { isRequired: false },
+      ui: {
+        ...(hiddenInfo as any),
+      },
+    }),
+
+    height: integer({
+      label: "Alto de la imagen",
+      validation: { isRequired: false },
+      ui: {
+        ...(hiddenInfo as any),
+      },
+    }),
+
     updatedAt: timestamp({
       label: "Fecha de Actualización",
       ui: {
@@ -105,6 +139,7 @@ export const GenerationRecordSchema = {
       },
     }),
   },
+
   hooks: {
     resolveInput: ({
       operation,

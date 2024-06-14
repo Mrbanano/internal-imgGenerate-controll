@@ -306,6 +306,20 @@ var GenerationRecordSchema = {
         ...limitInfo
       }
     }),
+    promptEnglish: (0, import_fields2.text)({
+      label: "Texto de entrada en ingles",
+      validation: { isRequired: false },
+      ui: {
+        ...limitInfo
+      }
+    }),
+    modelId: (0, import_fields2.text)({
+      label: "Id Modelo",
+      validation: { isRequired: true },
+      ui: {
+        ...hiddenInfo
+      }
+    }),
     generation: (0, import_fields2.text)({
       label: "Imagenes generadas",
       validation: { isRequired: false },
@@ -328,6 +342,20 @@ var GenerationRecordSchema = {
     apiCreditCost: (0, import_fields2.float)({
       label: "Costo en creditos",
       validation: { isRequired: true },
+      ui: {
+        ...hiddenInfo
+      }
+    }),
+    witdth: (0, import_fields2.integer)({
+      label: "Ancho de la imagen",
+      validation: { isRequired: false },
+      ui: {
+        ...hiddenInfo
+      }
+    }),
+    height: (0, import_fields2.integer)({
+      label: "Alto de la imagen",
+      validation: { isRequired: false },
       ui: {
         ...hiddenInfo
       }
@@ -395,7 +423,7 @@ var BalanceSchema = {
     balance: (0, import_fields3.integer)({
       label: "Balance",
       validation: { isRequired: true },
-      defaultValue: 0
+      defaultValue: Number(process.env.DEFAULT_BALANCE) || 0
     }),
     updatedAt: (0, import_fields3.timestamp)({
       label: "Actualizado",

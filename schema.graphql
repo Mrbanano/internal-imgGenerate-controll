@@ -249,9 +249,13 @@ type GenerationRecord {
   generationID: String
   generatedBy: User
   prompt: String
+  promptEnglish: String
+  modelId: String
   generation: String
   status: String
   apiCreditCost: Float
+  witdth: Int
+  height: Int
   updatedAt: DateTime
   createdAt: DateTime
 }
@@ -269,9 +273,13 @@ input GenerationRecordWhereInput {
   generationID: StringFilter
   generatedBy: UserWhereInput
   prompt: StringFilter
+  promptEnglish: StringFilter
+  modelId: StringFilter
   generation: StringFilter
   status: StringNullableFilter
   apiCreditCost: FloatFilter
+  witdth: IntNullableFilter
+  height: IntNullableFilter
   updatedAt: DateTimeNullableFilter
   createdAt: DateTimeNullableFilter
 }
@@ -287,13 +295,28 @@ input FloatFilter {
   not: FloatFilter
 }
 
+input IntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: IntNullableFilter
+}
+
 input GenerationRecordOrderByInput {
   id: OrderDirection
   generationID: OrderDirection
   prompt: OrderDirection
+  promptEnglish: OrderDirection
+  modelId: OrderDirection
   generation: OrderDirection
   status: OrderDirection
   apiCreditCost: OrderDirection
+  witdth: OrderDirection
+  height: OrderDirection
   updatedAt: OrderDirection
   createdAt: OrderDirection
 }
@@ -302,9 +325,13 @@ input GenerationRecordUpdateInput {
   generationID: String
   generatedBy: UserRelateToOneForUpdateInput
   prompt: String
+  promptEnglish: String
+  modelId: String
   generation: String
   status: String
   apiCreditCost: Float
+  witdth: Int
+  height: Int
   updatedAt: DateTime
   createdAt: DateTime
 }
@@ -324,9 +351,13 @@ input GenerationRecordCreateInput {
   generationID: String
   generatedBy: UserRelateToOneForCreateInput
   prompt: String
+  promptEnglish: String
+  modelId: String
   generation: String
   status: String
   apiCreditCost: Float
+  witdth: Int
+  height: Int
   updatedAt: DateTime
   createdAt: DateTime
 }
